@@ -53,7 +53,7 @@ let users = [
     {user: name = 'vasya', username: 'vasya222', password: 'qwerty123'},
     {user: name = 'vasya', username: 'vasya222', password: 'qwerty123'},
     {user: name = 'vasya', username: 'vasya222', password: 'qwerty123'}
-]
+];
 // Вивести в консоль пароль кожного користувача
 console.log(users[0].password);
 console.log(users[1].password);
