@@ -32,12 +32,10 @@ let arr1 = stringToarray(str)
 console.log(arr1)
 // - є масив чисел [10,8,-7,55,987,-1011,0,1050,0] . за допомоги map  перетворити всі об'єкти в масиві на стрінгові.
 
-let array = [10, 8, -7, 55, 987, -1011, 0, 1050, 0];
-let mass = array.map((d) => {
-    return d.split + (' ');
-});
+let numbers = [10, 8, -7, 55, 987, -1011, 0, 1050, 0];
+let strings = numbers.map(number => number.toString());
+console.log(strings);
 
-console.log(array)
 
 // - створити функцію sortNums(direction), яка прймає масив чисел, та сортує його від більшого до меньшого, або навпаки в залежності від значення аргументу direction.
 //     let nums = [11,21,3];
