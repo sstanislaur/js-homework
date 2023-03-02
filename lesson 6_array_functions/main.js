@@ -301,7 +301,7 @@ card.forEach(item => {
 })
 // - всі трефи від 9 та більше
 card.forEach(item => {
-    if (item.cardSuit === 'clubs' && item.value >= '9') {
+    if (item.cardSuit === 'clubs' && item.value === '9' ) {
         console.log(item)
     }
 })
