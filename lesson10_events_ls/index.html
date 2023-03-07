@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<form class="create">
+    <label for="name">Ім'я:</label>
+    <input type="text" id="name" name="name">
+    <br>
+    <label for="surname">Прізвище:</label>
+    <input type="text" id="surname" name="surname">
+    <br>
+    <label for="age">Вік:</label>
+    <input type="number" id="age" name="age">
+    <br>
+    <button type="button" onclick="submitForm()">Відправити</button>
+</form>
+
+<div id="result"></div>
+<script>
+    // Створити форму з трьома полями для name,surname,age та кнопкою. При натисканні на кнопку зчитати данні з полів, та вивести об'єкт в документ.
+    // Іншими словами : заповниои форму, натиснули кнопку, під формою з'явився блок з вашим об'єктом
+
+    function submitForm() {
+
+        let name = document.getElementById("name").value;
+        let surname = document.getElementById("surname").value;
+        let age = document.getElementById("age").value;
+
+        let person = {
+            name: name,
+            surname: surname,
+            age: age
+        };
+
+        let resultElement = document.getElementById("result");
+        resultElement.innerHTML = JSON.stringify(person);
+    }
+</script>
+<h1>Num: <i id="num"></i></h1>
+<script>
+    // є сторінка, на якій є блок, я кому знаходиьтся цифра. написати код, який при кожному перезавантажені сторінки буде додавати до неї +1
+    let num = localStorage.getItem('num')
+    let numberElement = document.getElementById('num');
+    let newNum = (+num + 1).toString();
+    numberElement.innerText = newNum;
+
+    localStorage.setItem('num', newNum);
+
+
+</script>
+<script>
+    // Є сторінка index.html (назва довільна), при відвідуванні якої в локальне сховще, в масив sessions зберігається інформація про дату та час відвідування сторінки. Є ще сторінка sessions.html (назва довільна), при відвідуванні якої потрібно відмалювати всю інформацію про відвідування сторінки index.html. Інфу НЕ виводити в консоль, а побудувати дом структуру під кожну сессію
+
+    let now = new Date();
+    let timestamp = now.getTime();
+    let sessions = sessionStorage.getItem('sessions');
+    if (!sessions) {
+        sessions = [];
+    } else {
+        sessions = JSON.parse(sessions);
+    }
+    sessions.push(timestamp);
+    sessionStorage.setItem('sessions', JSON.stringify(sessions));
+</script>
+
+<div id="data"></div>
+<button id="prev">Prev</button>
+<button id="next">Next</button>
+<br>
+<script>
+    // зробити масив на 100 об'єктів та дві кнопки prev next
+    // при завантажені сторінки з'являються перші 10 об'єктів.
+    //     При натисканні next виводяться настпні 10 об'єктів
+    // При натисканні prev виводяться попередні 10 об'єктів
+    let data = [];
+    for (let i = 1; i <= 100; i++) {
+        data.push({id: i, name: `Name ${i}`});
+    }
+
+    let startIndex = 0;
+    let endIndex = 9;
+    displayData(startIndex, endIndex);
+
+    document.getElementById("prev").addEventListener("click", () => {
+        if (startIndex > 0) {
+            startIndex -= 10;
+            endIndex -= 10;
+            displayData(startIndex, endIndex);
+        }
+    });
+
+    document.getElementById("next").addEventListener("click", () => {
+        if (endIndex < data.length - 1) {
+            startIndex += 10;
+            endIndex += 10;
+            displayData(startIndex, endIndex);
+        }
+    });
+
+    function displayData(startIndex, endIndex) {
+        let content = "";
+        for (let i = startIndex; i <= endIndex; i++) {
+            content += `<p>${data[i].id} - ${data[i].name}</p>`;
+        }
+        document.getElementById("data").innerHTML = content;
+    }
+</script>
+<label for="rows">Rows:</label>
+<input type="number" id="rows" min="1">
+<br>
+<label for="cols">Columns:</label>
+<input type="number" id="cols" min="1">
+<br>
+<label for="content">Cell content:</label>
+<input type="text" id="content">
+<br>
+<button id="createTableBtn">Create Table</button>
+
+<div id="tableContainer"></div>
+
+<script>
+    // *** Створити 3 інпута та кнопку. Один визначає кількість рядків, другий - кількість ячеєк, третій вмиіст ячеєк.
+    //     При натисканні кнопки, вся ця інформація зчитується і формується табличка, з відповідним вмістом.
+    // (Додатковачастина для завдання)
+    let createTableBtn = document.getElementById('createTableBtn');
+    let tableContainer = document.getElementById('tableContainer');
+
+    createTableBtn.addEventListener('click', function () {
+        let rows = document.getElementById('rows').value;
+        let cols = document.getElementById('cols').value;
+        let content = document.getElementById('content').value;
+
+        let tableHtml = '<table>';
+        for (let i = 0; i < rows; i++) {
+            tableHtml += '<tr>';
+            for (let j = 0; j < cols; j++) {
+                tableHtml += `<td>${content}</td>`;
+            }
+            tableHtml += '</tr>';
+        }
+        tableHtml += '</table>';
+
+        tableContainer.innerHTML = tableHtml;
+    });
+
+</script>
+
+</body>
+</html>
