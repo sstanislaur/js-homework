@@ -4,22 +4,74 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<style>
+    body {
+        background: linear-gradient(black, white);
+        height: 800px;
+    }
+
+    h1 {
+        font-family: "Bookman Old Style";
+        color: black;
+        margin-left: 525px;
+        font-size: 75px;
+        justify-content: center;
+        justify-items: center;
+        -webkit-text-stroke: 2px white;
+        text-stroke: 1px white;
+        position: relative;
+    }
+
+    div {
+        font-size: 24px;
+        border: black 3px solid;
+        justify-content: center;
+        justify-items: center;
+        align-items: center;
+        color: black;
+        text-decoration: none;
+        font-family: "Arial Black";
+        background: white;
+        display: flex;
+        flex-wrap: wrap;
+        border-top-left-radius: 25px;
+        border-top-right-radius: 25px;
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+        margin: 10px;
+    }
+
+    h2 {
+
+    }
+</style>
 <body>
+<h1>Post Details</h1>
 <script>
     let url = new URL(location.href)
     let json = url.searchParams.get('data')
     let post = JSON.parse(json)
     console.log(post)
 
+    fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}/`)
+        .then(response => response.json())
+        .then(data => {
+            const dataElement = document.getElementById('data');
+            dataElement.innerHTML = `<h2> ${data.title} ${data.body} </h2>`
 
-    let url1 = new URL(`https://jsonplaceholder.typicode.com/posts/${1}/comments`);
+        })
+        .catch(error => console.error(error));
+
+
+
+    let url1 = new URL(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`);
     fetch(url1)
         .then(value => value.json())
         .then(comments => {
             for (const com of comments) {
                 let div = document.createElement('div')
                 div.classList.add('comments')
-                div.innerText = `${com.id} ${com.name}`
+                div.innerText = `${com.name}`
                 document.body.appendChild(div);
             }
         });

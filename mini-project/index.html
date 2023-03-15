@@ -9,27 +9,70 @@
 </head>
 <style>
     body {
-
+        background: linear-gradient(black, white);
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 5px;
+        height: 750px;
     }
+
+    a:hover {
+        background: linear-gradient(black, white);
+    }
+
     a {
-        font-size: 30px;
+        font-size: 24px;
         border: black 3px solid;
         justify-content: center;
+        justify-items: center;
+        align-items: center;
         display: flex;
-        color: red;
+        color: black;
+        margin-left: 30px;
+        text-decoration: none;
+        padding: 15px;
+        font-family: "Arial Black";
+
+
     }
 
     div {
-        font-size: 36px;
+        margin: 10px;
+        font-size: 24px;
         justify-content: center;
+        justify-items: center;
         display: flex;
-
+        padding: 5px;
+        color: black;
+        height: 100px;
+        width: 675px;
+        background: silver;
+        border: 5px solid black;
+        align-items: center;
+        background: linear-gradient(white, silver);
+        border-top-left-radius: 25px;
+        border-top-right-radius: 25px;
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+        font-family: "Bookman Old Style";
 
     }
+    h1 {
+      font-family: "Bookman Old Style";
+        color: black;
+        margin-left: 605px;
+        margin-top: 250px;
+        font-size: 75px;
+        justify-content: center;
+        justify-items: center;
+       position: absolute;
+        -webkit-text-stroke: 2px white;
+        text-stroke: 1px white;
+    }
 
-
-    </style>
+</style>
 <body>
+<h1>USERS</h1>
 <script>
     let url = new URL('https://jsonplaceholder.typicode.com/users');
     fetch(url)
@@ -39,7 +82,7 @@
                 let div = document.createElement('div')
                 div.classList.add('user')
                 let a = document.createElement('a');
-                div.innerText = `id: ${user.id} name: ${user.name} `
+                div.innerText = `id: ${user.id} name: ${user.name}`
                 a.innerText = `Learn more`
                 a.href = 'user-details.html?data=' + JSON.stringify(user);
                 div.appendChild(a);
