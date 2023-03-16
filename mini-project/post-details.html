@@ -4,49 +4,94 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<h1>Post Details</h1>
 <style>
     body {
         background: linear-gradient(black, white);
-        height: 800px;
+        text-align: center;
     }
 
     h1 {
         font-family: "Bookman Old Style";
         color: black;
-        margin-left: 525px;
         font-size: 75px;
         justify-content: center;
         justify-items: center;
         -webkit-text-stroke: 2px white;
         text-stroke: 1px white;
         position: relative;
+
     }
 
     div {
-        font-size: 24px;
-        border: black 3px solid;
+        font-size: 20px;
         justify-content: center;
         justify-items: center;
         align-items: center;
-        color: black;
-        text-decoration: none;
-        font-family: "Arial Black";
-        background: white;
         display: flex;
-        flex-wrap: wrap;
+        color: black;
+        height: 200px;
+        width: 1000px;
+        margin-top: 20px;
+        background: silver;
+        border: 5px solid black;
+        background: linear-gradient(white, silver);
         border-top-left-radius: 25px;
         border-top-right-radius: 25px;
         border-bottom-left-radius: 25px;
         border-bottom-right-radius: 25px;
-        margin: 10px;
+        font-family: "Bookman Old Style";
+        text-align: center;
+        margin-left: 250px;
+
     }
 
     h2 {
-
+        font-size: 24px;
+        justify-content: center;
+        justify-items: center;
+        align-items: center;
+        display: flex;
+        color: black;
+        height: 200px;
+        width: 1000px;
+        background: silver;
+        border: 5px solid black;
+        background: linear-gradient(white, silver);
+        border-top-left-radius: 25px;
+        border-top-right-radius: 25px;
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+        font-family: Arial;
+        text-align: center;
     }
+
+    h3 {
+        color: white;
+        position: absolute;
+        -webkit-text-stroke: 2px black;
+        margin-top: 280px;
+        margin-right: 700px;
+    }
+
+    h4 {
+        position: absolute;
+        margin-bottom: 180px;
+        font-family: "Arial Black";
+        font-size: 24px;
+    }
+
+    h5 {
+        position: relative;
+        font-size: 24px;
+        margin-top: -40px;
+        font-family: "Arial Black";
+    }
+
 </style>
 <body>
-<h1>Post Details</h1>
+<div id="data"></div>
+<h1>Comments</h1>
 <script>
     let url = new URL(location.href)
     let json = url.searchParams.get('data')
@@ -57,22 +102,24 @@
         .then(response => response.json())
         .then(data => {
             const dataElement = document.getElementById('data');
-            dataElement.innerHTML = `<h2> ${data.title} ${data.body} </h2>`
+            dataElement.innerHTML = `<h4>${data.title}</h4> <h2>${data.body}</h2> <h3>Post id:${data.id} User id:${data.userId}</h3>  `
 
         })
         .catch(error => console.error(error));
 
 
-
-    let url1 = new URL(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`);
-    fetch(url1)
+    fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`)
         .then(value => value.json())
         .then(comments => {
-            for (const com of comments) {
+            for (const coment of comments) {
                 let div = document.createElement('div')
                 div.classList.add('comments')
-                div.innerText = `${com.name}`
+                div.innerText = `${coment.name} ${coment.body}`
+                let h5 = document.createElement('h5')
+                h5.innerHTML = `id user:${coment.id} Email:${coment.email}`
                 document.body.appendChild(div);
+                document.body.appendChild(h5);
+
             }
         });
 
