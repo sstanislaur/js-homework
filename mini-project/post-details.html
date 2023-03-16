@@ -5,6 +5,8 @@
     <title>Title</title>
 </head>
 <h1>Post Details</h1>
+<button onclick="redirectToPage()">Home Page</button>
+
 <style>
     body {
         background: linear-gradient(black, white);
@@ -88,6 +90,32 @@
         font-family: "Arial Black";
     }
 
+    h6 {
+        position: absolute;
+        font-size: 20px;
+        font-family: "Arial Black";
+        margin-top: -65px;
+    }
+
+    button {
+        border: black 3px solid;
+        display: flex;
+        position: absolute;
+        color: black;
+        margin-right: 1000px;
+        margin-top: -180px;
+        text-decoration: none;
+        font-family: "Arial Black";
+        border-top-left-radius: 25px;
+        border-top-right-radius: 25px;
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+
+    }
+
+    button:hover {
+        background: linear-gradient(black, white);
+    }
 </style>
 <body>
 <div id="data"></div>
@@ -114,7 +142,7 @@
             for (const coment of comments) {
                 let div = document.createElement('div')
                 div.classList.add('comments')
-                div.innerText = `${coment.name} ${coment.body}`
+                div.innerHTML = `<h6>${coment.name}</h6> ${coment.body}`
                 let h5 = document.createElement('h5')
                 h5.innerHTML = `id user:${coment.id} Email:${coment.email}`
                 document.body.appendChild(div);
@@ -122,6 +150,10 @@
 
             }
         });
+
+    function redirectToPage() {
+        window.location.href = "index.html";
+    }
 
 </script>
 </body>

@@ -22,6 +22,24 @@
         text-align: center;
     }
 
+    .click {
+        border: black 3px solid;
+        display: flex;
+        color: black;
+        margin-left: 5px;
+        margin-top: -40px;
+        position: absolute;
+        height: 25px;
+        width: 50px;
+        font-size: 12px;
+        text-decoration: none;
+        font-family: "Arial Black";
+        border-top-left-radius: 25px;
+        border-top-right-radius: 25px;
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+    }
+
     button:hover {
         background: linear-gradient(black, white);
     }
@@ -61,14 +79,14 @@
         text-decoration: none;
         font-family: "Arial Black";
         background: white;
-        display: flex;
-        flex-wrap: wrap;
         border-top-left-radius: 25px;
         border-top-right-radius: 25px;
         border-bottom-left-radius: 25px;
         border-bottom-right-radius: 25px;
         margin: 10px;
+        display: block;
     }
+
 
     h3 {
         font-size: 24px;
@@ -174,7 +192,7 @@
         font-family: "Bookman Old Style";
     }
 
-    h7{
+    h7 {
         font-size: 30px;
         justify-content: center;
         justify-items: center;
@@ -193,7 +211,8 @@
         font-family: "Bookman Old Style";
         margin-left: 210px;
     }
-    h8{
+
+    h8 {
         font-size: 30px;
         justify-content: center;
         justify-items: center;
@@ -211,16 +230,19 @@
         border-bottom-right-radius: 25px;
         font-family: "Bookman Old Style";
         margin-left: 740px;
-        margin-top:-310px;
+        margin-top: -310px;
     }
-p {
-    text-align: justify-all;
-    position: absolute;
-    margin-bottom: 225px;
-    font-family: "Arial Black";
-}
+
+    p {
+        text-align: justify-all;
+        position: absolute;
+        margin-bottom: 225px;
+        font-family: "Arial Black";
+    }
+
 </style>
 <body>
+<button class="click" onclick="redirectToPage()">Prev</button>
 <h1>User Details</h1>
 <div id="data"></div>
 <script>
@@ -243,10 +265,10 @@ p {
 
 </script>
 
-<button id="user-posts">Post of Current User</button>
+<button id="posts">Post of Current User</button>
 
 <script>
-    document.getElementById("user-posts").addEventListener("click", getUserPosts);
+    document.getElementById("posts").addEventListener("click", getUserPosts);
 
 
     function getUserPosts() {
@@ -263,14 +285,16 @@ p {
             let div = document.createElement('div')
             div.classList.add('post')
             let a = document.createElement('a');
-            a.innerText = `${post.title}`
+            a.innerHTML = `${post.title}`
             a.href = 'post-details.html?data=' + JSON.stringify(post);
             div.appendChild(a);
             document.body.appendChild(div);
         }
     }
 
-
+    function redirectToPage() {
+        window.location.href = "index.html";
+    }
 </script>
 </body>
 </html>
